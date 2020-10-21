@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ex3;
+package ex4;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -26,10 +26,12 @@ public class Client {
             Scanner scanner = new Scanner(System.in);
             
             while (true) {                
-                System.out.print("Enter number (Limit 0 -> 9) : ");
+                System.out.print("Enter number (plz enter only number): ");
                 dataOutputStream.writeUTF(scanner.nextLine());
                 dataOutputStream.flush();
-                System.out.println("Convert to string: " + dataInputStream.readUTF());
+                
+                System.out.println("Value Fibonaci = " + dataInputStream.readUTF());
+                
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());

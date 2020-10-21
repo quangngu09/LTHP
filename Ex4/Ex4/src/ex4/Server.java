@@ -3,33 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ex3;
+package ex4;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 /**
  *
  * @author Admin
  */
-public class Client {
+public class Server {
+    
+   public static int fibonaci(int number){
+       if (number == 1 || number == 2) {
+           return 1;
+       }
+       return fibonaci(number - 1) + fibonaci(number - 2);
+   }
+    
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("localhost", 1209);
+            ServerSocket serverSocket = new ServerSocket(1209);
+            
+            Socket socket = serverSocket.accept();
             
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             
-            Scanner scanner = new Scanner(System.in);
-            
             while (true) {                
-                System.out.print("Enter number (Limit 0 -> 9) : ");
-                dataOutputStream.writeUTF(scanner.nextLine());
+                String dataClient = dataInputStream.readUTF();
+                String valueFibonaci = Integer.toString(fibonaci(Integer.parseInt(dataClient)));
+                System.out.println("" + fibonaci(Integer.parseInt(dataClient)));
+                dataOutputStream.writeUTF(valueFibonaci);
                 dataOutputStream.flush();
-                System.out.println("Convert to string: " + dataInputStream.readUTF());
+                
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
