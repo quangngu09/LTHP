@@ -30,7 +30,7 @@ public class Client {
                 dataOutputStream.writeUTF(scanner.nextLine());
                 dataOutputStream.flush();
                 
-                System.out.println("Value Fibonaci = " + dataInputStream.readUTF());
+                System.out.println("Value Fibonacci = " + dataInputStream.readUTF());
                 
             }
         } catch (Exception e) {

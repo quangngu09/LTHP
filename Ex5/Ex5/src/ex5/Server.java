@@ -3,43 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ex4;
+package ex5;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
  * @author Admin
  */
 public class Server {
-    
-   public static int fibonaci(int number){
-       if (number == 1 || number == 2) {
-           return 1;
-       }
-       return fibonaci(number - 1) + fibonaci(number - 2);
-   }
-    
     public static void main(String[] args) {
         try {
+            System.out.println("Address Server: localhost \n Port: 1209");
+            
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Calendar calendar = Calendar.getInstance();
+            String time =  dateFormat.format(calendar.getTime());
+            
             ServerSocket serverSocket = new ServerSocket(1209);
             
             Socket socket = serverSocket.accept();
             
-            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-            
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             
-            while (true) {                
-                String dataClient = dataInputStream.readUTF();
-                String valueFibonaci = Integer.toString(fibonaci(Integer.parseInt(dataClient)));
-                dataOutputStream.writeUTF(valueFibonaci);
-                dataOutputStream.flush();
-                
+            if (socket.isConnected()) {
+               dataOutputStream.writeUTF(time);
+               dataOutputStream.flush();
             }
+            
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
