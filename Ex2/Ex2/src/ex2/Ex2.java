@@ -36,13 +36,6 @@ public class Ex2 {
         }
     };
     
-    static TimerTask tastSetNumber = new TimerTask() {
-        @Override
-        public void run() {
-            setNumber();
-        }
-    };
-              
         
     /**
      * @param args the command line arguments
@@ -54,15 +47,20 @@ public class Ex2 {
         timerSetNumber = new Timer("Timer Set Number");
         timerGetNumber = new Timer("Timer Get Number");
         
-        timerSetNumber.schedule(tastSetNumber,0,delayTask1);
+        timerSetNumber.schedule( new TimerTask() {
+            @Override
+            public void run() {
+                if (number == 0) {
+                    timerSetNumber.cancel();
+                    timerGetNumber.cancel();
+                    timerSetNumber.purge();
+                    timerGetNumber.purge();
+                }
+                setNumber();
+            }
+        } ,0,delayTask1);
         timerGetNumber.schedule(taskGetNumber,0,delayTask2);
         
-        if(number == 0){
-            timerSetNumber.cancel();
-            timerSetNumber.purge();
-            timerGetNumber.cancel();
-            timerGetNumber.purge();
-        }
     }
     
 }
