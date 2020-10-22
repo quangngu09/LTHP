@@ -21,7 +21,8 @@ public class ThreadTwo extends Thread{
     public void run() {
         while (true) {            
             try {
-                switch (this.threadOne.number){
+                if (this.threadOne.number != null) {
+                    switch (this.threadOne.number){
                     case 0:
                         System.out.println("Khong");
                         break;
@@ -58,6 +59,12 @@ public class ThreadTwo extends Thread{
                         
                 }
                 Thread.sleep(1000);
+                    
+                }
+                else{
+                    System.out.println(this.threadOne.number);
+                    Thread.sleep(1000);
+                }
             } catch (Exception e) {
                     System.err.println("sleep failed");
             }

@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class ThreadOne extends Thread{
     
-    public  static int number = -1;
+    public  static Integer number;
     @Override
     public void run() {
         while (true) {
