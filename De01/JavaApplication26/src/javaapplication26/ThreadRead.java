@@ -32,7 +32,7 @@ public class ThreadRead extends Thread{
                 String lineString;
                 while ((lineString = bufferedReader.readLine()) != null) {                    
                     System.out.println(lineString);
-                    if (lineString.contains("#")) {
+                    if (lineString.contains("quit")) {
                         break flag;
                     }
                 }

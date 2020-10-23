@@ -32,7 +32,7 @@ public class ThreadWrite extends Thread{
                 System.out.print("Enter string: ");
                 String data = scanner.nextLine();
                 printStream.println(data);
-                if (data.equals("#")) {
+                if (data.equals("quit")) {
                     this.stop();
                 }
             }
